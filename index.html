@@ -76,7 +76,7 @@ var family = new FamilyTree(document.getElementById('tree'), {
     }
 });
 
-family.on('init', function (sender) { sender.editUI.show(26, true); });
+//family.on('init', function (sender) { sender.editUI.show(030101, true); });
 
 family.editUI.on('element-btn-click', function (sender, args) {
     FamilyTree.fileUploadDialog(args, function (file) {
@@ -88,74 +88,113 @@ family.editUI.on('element-btn-click', function (sender, args) {
 
 family.load(
     [
+        // 01            01          01
+        // Level 1    Anak ke-1   Laki-laki
+        // 01            01          02
+        // Level 1    Anak ke-1   Perempuan
+        //
+
+        // 01            01         01          01
+        // Level 1  Anak dari-1  Anak ke-1   Laki-laki
+        // 01           01          01          02
+        // Level 1  Anak dari-1  Anak ke-1   Perempuan
+        // 
+
         // Leluhur
-        { id: 19, pids: [20], gender: 'male', name: 'Buyut Abu Amr', birthDate: '1893-06-05', photo: 'assets/img/male.jpg', city: "Shelekhov", country: "Indonesia" },
-        { id: 20, pids: [19], gender: 'female', name: 'Buyut Abu Amr', birthDate: '1891-09-19', photo: 'assets/img/female.jpg', city: "Shelekhov", country: "Indonesia" },
-        { id: 21, pids: [22], gender: 'male', name: 'Canggah', fid: 19, mid: 20, birthDate: '1921-07-14', photo: 'assets/img/male.jpg', city: "Krasnoyarsk", country: "Indonesia" },
-        { id: 22, pids: [21], gender: 'female', name: 'Canggah', birthDate: '1933-11-02', photo: 'assets/img/female.jpg', city: "Krasnoyarsk", country: "Indonesia" },
+        { id: 010101, pids: [010102], gender: 'male', name: 'Buyut Abu Amr', birthDate: '1893-06-05', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Shelekhov", country: "Indonesia" },
+        { id: 010102, pids: [010101], gender: 'female', name: 'Istrinya Buyut Abu Amr', birthDate: '1891-09-19', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Shelekhov", country: "Indonesia" },
+        { id: 020101, pids: [020102], gender: 'male', name: 'Canggah', fid: 010101, mid: 010102, birthDate: '1921-07-14', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Krasnoyarsk", country: "Indonesia" },
+        { id: 020102, pids: [020101], gender: 'female', name: 'Canggah', birthDate: '1933-11-02', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Krasnoyarsk", country: "Indonesia" },
+        { id: 020201, pids: [020202], gender: 'male', name: 'Saudaranya Canggah', fid: 010101, mid: 010102, birthDate: '1921-07-14', photo: 'assets/img/male.jpg', city: "Krasnoyarsk", country: "Indonesia" },
+        { id: 020202, pids: [020201], gender: 'female', name: 'Istri Saudaranya Canggah', birthDate: '1934-10-11', photo: 'assets/img/female.jpg', city: "Krasnoyarsk", country: "Indonesia" },
         
-        // Keluarga H. Robani
-        { id: 26, pids: [25], gender: 'male', name: 'H. Robani', fid: 21, mid: 22, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/H Robani.jpeg', city: "Kediri", country: "Indonesia" },
-        { id: 25, pids: [26], gender: 'female', name: 'Hj. Jariyah', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/Hj Jariyah.jpeg', city: "Kediri", country: "Indonesia" },
+        // Anak dari H. Robani
+        { id: 030101, pids: [030102], gender: 'male', name: 'H. Robani', fid: 020101, mid: 020102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/H Robani.jpeg', city: "Kediri", country: "Indonesia" },
+        { id: 030102, pids: [030101], gender: 'female', name: 'Hj. Jariyah', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/Hj Jariyah.jpeg', city: "Kediri", country: "Indonesia" },
+        { id: 030201, pids: [030202], gender: 'male', name: 'Saudara Kembarnya Mbah H. Robani', fid: 020101, mid: 020102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 030202, pids: [030201], gender: 'female', name: 'Istri Saudara Kembarnya Mbah H. Robani', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
         
-        { id: 0, pids: [1], gender: 'male', name: 'Iktiarno', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
-        { id: 1, pids: [0], gender: 'female', name: 'Kaliyatin', fid: 26, mid: 25,birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 040101, pids: [040102], gender: 'male', name: 'Soepono', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', address: "Sekitar Surabaya", city: "Surabaya", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040102, pids: [040101], gender: 'female', name: 'Siti Futikat', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Sekitar Surabaya", city: "Surabaya", phone: "+62 0000 000 00", country: "Indonesia" },
         
-        { id: 6, pids: [10], gender: 'male', name: 'Soepono', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', address: "Sekitar Surabaya", city: "Surabaya", phone: "+62 0000 000 00", country: "Indonesia" },
-        { id: 10, pids: [6], gender: 'female', name: 'Siti Futikat', fid: 26, mid: 25, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Sekitar Surabaya", city: "Surabaya", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040201, gender: 'male', name: 'Pak Moh', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
         
-        { id: 3, pids: [11], gender: 'male', name: 'Abdul Rouf', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", phone: "+62 0000 000 00", country: "Indonesia" },
-        { id: 11, pids: [3], gender: 'female', name: 'Miftahul Rohmah', fid: 26, mid: 25, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg',  city: "Tulungagung", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040301, pids: [040302], gender: 'male', name: 'Abdul Rouf', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040302, pids: [040301], gender: 'female', name: 'Miftahul Rohmah', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg',  city: "Tulungagung", phone: "+62 0000 000 00", country: "Indonesia" },
         
-        { id: 28, pids: [27], gender: 'male', name: 'Isa', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
-        { id: 27, pids: [28], gender: 'female', name: 'Rufiatus Sholehah', fid: 26, mid: 25,birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 040401, pids: [040402], gender: 'male', name: 'Iktiarno', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 040402, pids: [040401], gender: 'female', name: 'Kaliyatin', fid: 030101, mid: 030102,birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        
+        { id: 040501, pids: [040502], gender: 'male', name: 'Isa', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 040502, pids: [040501], gender: 'female', name: 'Rufiatus Sholehah', fid: 030101, mid: 030102,birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        
+        { id: 040601, pids: [040602], gender: 'male', name: 'Ustadz', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 040602, pids: [040601], gender: 'female', name: 'Istrinya', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        
+        { id: 040701, pids: [040702], gender: 'male', name: 'Arif', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 040702, pids: [040701], gender: 'female', name: 'Tutik', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        
+        { id: 050401, gender: 'male', name: 'Bobby', fid: 040601, mid: 040602, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 050501, gender: 'male', name: 'Roberto', fid: 040601, mid: 040602, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 050601, gender: 'male', name: 'Anak ke 1', fid: 040601, mid: 040602, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
+        
+
+        { id: 050201, gender: 'male', name: 'Ade', fid: 040701, mid: 040702, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 0501022, gender: 'female', name: 'Jelita', fid: 040701, mid: 040702, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 050301, gender: 'male', name: 'Anak ke 3', fid: 040701, mid: 040702, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
+        
+        { id: 050101, pids: [050102], gender: 'male', name: 'Lino Garda Denaro', fid: 040501, mid: 040502, birthDate: '1993-06-22', deathDate: 'yyyy-mm-dd', photo: 'assets/img/lino.jpg', city: "Krasnodar", country: "Indonesia" },
+        { id: 050102, pids: [050101], gender: 'female', name: 'An Nuur Taqwayaroh Wamayataqillah', birthDate: '1995-06-13', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Neybuta, bld. 57, appt. 336", city: "Primorskiy kray", phone: "+7(4232)14-90-18", country: "Indonesia" },
+        { id: 060102, gender: 'female', name: 'Khalishah Nazra At-Taqqi', fid: 050101, mid: 050102, birthDate: '2021-03-20', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Ul Krasilnikova, bld. 24", city: "Kemerovo", phone: "+7(3842)45-38-84", country: "Indonesia" },
+        
+        { id: 050202, gender: 'female', name: 'Klara Noviantika Sandy', fid: 040501, mid: 040502, birthDate: '1995-11-07', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Neybuta, bld. 57, appt. 336", city: "Primorskiy kray", phone: "+7(861)166-92-10", country: "Indonesia" },
         
         // Keluarga Abdul Rouf
-        { id: 61, pids: [62], gender: 'male', name: 'Moh. Heru Efendi', fid: 3, mid: 11, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
+        { id: 61, pids: [62], gender: 'male', name: 'Moh. Heru Efendi', fid: 040301, mid: 040302, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 62, pids: [61], gender: 'female', name: 'Siti Mardiyah', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 63, gender: 'female', name: 'Intan Calya Andani', fid: 61, mid: 62, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 64, gender: 'female', name: 'Chumaira Hidayaturrohmah', fid: 61, mid: 62, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         
         { id: 65, pids: [66], gender: 'male', name: 'Wafi', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
-        { id: 66, pids: [65], gender: 'female', name: 'Dewi Hajar', fid: 3, mid: 11, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
+        { id: 66, pids: [65], gender: 'female', name: 'Dewi Hajar', fid: 040301, mid: 040302, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 75, gender: 'female', name: 'Firly Nur Lailynikmah', fid: 65, mid: 66, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 76, gender: 'female', name: 'Mutiara Nur Maulidina', fid: 65, mid: 66, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 77, gender: 'female', name: 'Salsabila Nur Rohmah', fid: 65, mid: 66, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         
         { id: 67, pids: [68], gender: 'male', name: 'Suwarina Rofik', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
-        { id: 68, pids: [67], gender: 'female', name: 'Yunita Rahmawati', fid: 3, mid: 11, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
+        { id: 68, pids: [67], gender: 'female', name: 'Yunita Rahmawati', fid: 040301, mid: 040302, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 69, gender: 'female', name: 'Aulya Dwi Amalia', fid: 67, mid: 68, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 70, gender: 'male', name: 'Zaidan Azkal Azkiyak', fid: 67, mid: 68, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 71, gender: 'female', name: 'Afina Widya Putri', fid: 67, mid: 68, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         
-        { id: 72, pids: [73], gender: 'male', name: 'Ahmad Bik Syauqi', fid: 3, mid: 11, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
+        { id: 72, pids: [73], gender: 'male', name: 'Ahmad Bik Syauqi', fid: 040301, mid: 040302, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 73, pids: [72], gender: 'female', name: 'Sari Dwi Prisnayanti', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Tulungagung", country: "Indonesia" },
         { id: 74, gender: 'male', name: 'Moh. Akbar Ramdani', fid: 72, mid: 73, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
         
 
         // Keluarga Pak Soepono
-        { id: 23, pids: [24], gender: 'male', name: 'Wisnu Purnantoro', fid: 6, mid: 10, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 23, pids: [24], gender: 'male', name: 'Wisnu Purnantoro', fid: 040101, mid: 040102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 24, pids: [23], gender: 'female', name: 'Fenti Endah Lestari', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         
         { id: 29, pids: [32], gender: 'male', name: 'Sutrisno', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
-        { id: 32, pids: [29], gender: 'female', name: 'Dian Pusaparini', fid: 6, mid: 10, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 32, pids: [29], gender: 'female', name: 'Dian Pusaparini', fid: 040101, mid: 040102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 39, gender: 'female', name: 'Nadya Aiszah Aprilia Trisna', fid: 29, mid: 32, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 40, gender: 'female', name: 'Putri Sabrina Dewi Trisna', fid: 29, mid: 32, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
-        { id: 41, gender: 'male', name: 'Bay Saul Husein', mid: 32, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
-        { id: 42, gender: 'female', name: 'Bay Sani Febria Salsabilah', mid: 32, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 41, gender: 'male', name: 'Bay Saul Husein', fid: 29, mid: 32, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 42, gender: 'female', name: 'Bay Sani Febria Salsabilah', fid: 29, mid: 32, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         
         { id: 33, pids: [34], gender: 'male', name: 'M. Bahrul Ulum', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
-        { id: 34, pids: [33], gender: 'female', name: 'Rina Rahmawati', fid: 6, mid: 10, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 34, pids: [33], gender: 'female', name: 'Rina Rahmawati', fid: 040101, mid: 040102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 43, gender: 'female', name: 'Kenjua Farrah F.A.I', fid: 33, mid: 34, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 44, gender: 'male', name: 'Valent M Azhim. F', fid: 33, mid: 34, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
         
         { id: 35, pids: [36], gender: 'male', name: 'Bambang Diriyono', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
-        { id: 36, pids: [35], gender: 'female', name: 'Maria Ulfa', fid: 6, mid: 10, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 36, pids: [35], gender: 'female', name: 'Maria Ulfa', fid: 040101, mid: 040102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 45, gender: 'female', name: 'Destasya Aurora Putri Arneta', fid: 35, mid: 36, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 46, gender: 'female', name: 'Hezka Anaya Putri Caesarita', fid: 35, mid: 36, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         
         { id: 37, pids: [38], gender: 'male', name: 'Malik', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
-        { id: 38, pids: [37], gender: 'female', name: 'Sri Rahayu', fid: 6, mid: 10, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 38, pids: [37], gender: 'female', name: 'Sri Rahayu', fid: 040101, mid: 040102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 47, gender: 'male', name: 'Evan', fid: 37, mid: 38, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 48, pids: [49], gender: 'male', name: 'Wawan Hendra Kurniawan', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 49, pids: [48], gender: 'female', name: 'Risma', fid: 37, mid: 38, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
@@ -176,22 +215,17 @@ family.load(
 
         // Keluarga Pak Iktiarno
         { id: 13, pids: [2], gender: 'male', name: 'Agus Muji Santoso', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
-        { id: 2, pids: [13], gender: 'female', name: 'Poppy Rahmatika Primandiri', fid: 0, mid: 1, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 2, pids: [13], gender: 'female', name: 'Poppy Rahmatika Primandiri', fid: 040401, mid: 040402, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
         { id: 15, gender: 'male', name: 'Fatih Aydin Atmadja', fid: 13, mid: 2, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
         { id: 16, gender: 'male', name: 'Faza Hirasaki Nareswara', fid: 13, mid: 2, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
         
-        { id: 8, pids: [12], gender: 'male', name: 'Whendy Pamungkas Puring Prahari', fid: 0, mid: 1, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 8, pids: [12], gender: 'male', name: 'Whendy Pamungkas Puring Prahari', fid: 040401, mid: 040402, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
         { id: 12, pids: [8], gender: 'female', name: 'Faninda Mei Lisa Putri', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
         { id: 17, gender: 'male', name: 'Auriga Tabish Athalla', fid: 8, mid: 12, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
         
-        { id: 9, pids: [14], gender: 'female', name: 'Wuri Cahya Handaru', fid: 0, mid: 1, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 9, pids: [14], gender: 'female', name: 'Wuri Cahya Handaru', fid: 040401, mid: 040402, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
         { id: 14, pids: [9], gender: 'male', name: 'Nurwahid Habibullah', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
         { id: 18, gender: 'female', name: 'Jingga Tavisha Abian', fid: 9, mid: 14, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
-        
-        { id: 30, pids: [31], gender: 'male', name: 'Lino Garda Denaro', fid: 27, mid: 28, birthDate: '1993-06-22', deathDate: 'yyyy-mm-dd', photo: 'assets/img/lino.jpg', city: "Krasnodar", country: "Indonesia" },
-        { id: 31, pids: [30], gender: 'female', name: 'An Nuur Taqwayaroh Wamayataqillah', birthDate: '1995-06-13', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Neybuta, bld. 57, appt. 336", city: "Primorskiy kray", phone: "+7(4232)14-90-18", country: "Indonesia" },
-        { id: 5, gender: 'female', name: 'Klara Noviantika Sandy', fid: 27, mid: 28, birthDate: '1995-11-07', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Neybuta, bld. 57, appt. 336", city: "Primorskiy kray", phone: "+7(861)166-92-10", country: "Indonesia" },
-        { id: 7, gender: 'female', name: 'Khalishah Nazra At-Taqqi', fid: 30, mid: 31, birthDate: '2021-03-20', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Ul Krasilnikova, bld. 24", city: "Kemerovo", phone: "+7(3842)45-38-84", country: "Indonesia" },
         
         
         //{ id: 10, gender: 'male', name: 'Efrosinia Sorokina', fid: 30, mid: 31, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Lenina, bld. 175/1, appt. 43", city: "Rostov-na-donu", phone: "+7(863)354-67-14", country: "Indonesia" },
