@@ -43,6 +43,7 @@ var family = new FamilyTree(document.getElementById('tree'), {
         field_0: "name",
         field_1: "birthDate",
         html: "html",
+        gender: "gender",
         img_0: "photo"
     },
     //nodeMenu: {
@@ -67,6 +68,7 @@ var family = new FamilyTree(document.getElementById('tree'), {
                 { type: 'select', options: [{ value: 'sby', text: 'Surabaya' }, { value: 'kdr', text: 'Kediri' }, { value: 'blt', text: 'Blitar' }], label: 'Negara', binding: 'country' },
                 { type: 'textbox', label: 'Kota', binding: 'city' },
             ],
+            { type: 'textbox', label: 'Jenis kelamin', binding: 'gender' },
             { type: 'textbox', label: 'Photo Url', binding: 'ImgUrl', btn: 'Upload' },
             { type: 'textbox', label: 'Phone', binding: 'Mobile' },
         ],
