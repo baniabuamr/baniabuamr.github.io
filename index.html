@@ -35,8 +35,8 @@ function pdf(nodeId) {
 }
 */
 var family = new FamilyTree(document.getElementById('tree'), {
-    template: "tommy",
-    mode: 'light',
+    template: "hugo", // tommy
+    mode: 'dark',
     padding: 10,
     levelSeparation: 200,
     scaleInitial: FamilyTree.match.height,
@@ -44,6 +44,7 @@ var family = new FamilyTree(document.getElementById('tree'), {
     miniMap: true,
     enableSearch: true,
     //mouseScrool: FamilyTree.action.none,
+    //mouseScrool: FamilyTree.action.ctrlZoom,
     menu: {
             //pdf: { text: "Export PDF" },
             //png: { text: "Export PNG" },,
