@@ -17,7 +17,20 @@
 //JavaScript
 window.onload = function () {
 
+// FamilyTree.ESCAPE_HTML = false;
+
+/*
+FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
+FamilyTree.templates.myTemplate.size = [200, 200];
+FamilyTree.templates.myTemplate.node = '';
+FamilyTree.templates.myTemplate.html = '{val}';
+FamilyTree.templates.myTemplate_male = Object.assign({}, FamilyTree.templates.myTemplate);
+FamilyTree.templates.myTemplate_female = Object.assign({}, FamilyTree.templates.myTemplate);
+*/
+
 var family = new FamilyTree(document.getElementById('tree'), {
+    template: "tommy",
+    mode: 'light',
     padding: 10,
     levelSeparation: 200,
     scaleInitial: FamilyTree.match.height,
@@ -29,12 +42,13 @@ var family = new FamilyTree(document.getElementById('tree'), {
     nodeBinding: {
         field_0: "name",
         field_1: "birthDate",
+        html: "html",
         img_0: "photo"
     },
-    nodeMenu: {
-        details: { text: "Details" },
-        edit: { text: "Edit" }
-    },
+    //nodeMenu: {
+    //    details: { text: "Details" },
+    //    edit: { text: "Edit" }
+    //},
     editForm: {
         titleBinding: "name",
         photoBinding: "photo",
@@ -43,41 +57,45 @@ var family = new FamilyTree(document.getElementById('tree'), {
         addMoreBtn: 'Add element',
         addMoreFieldName: 'Element name',
         elements: [
-            { type: 'textbox', label: 'Full Name', binding: 'name' },
-
+            { type: 'textbox', label: 'Doa', binding: 'html' },
+            { type: 'textbox', label: 'Nama Lengkap', binding: 'name' },
             [
-                { type: 'date', label: 'Birth Date', binding: 'birthDate' },
-                { type: 'date', label: 'Death Date', binding: 'deathDate' }
+                { type: 'date', label: 'Tanggal Lahir', binding: 'birthDate' },
+                { type: 'date', label: 'Tanggal Wafat', binding: 'deathDate' }
             ],
             [
-                { type: 'select', options: [{ value: 'bg', text: 'Bulgaria' }, { value: 'ru', text: 'Russia' }, { value: 'gr', text: 'Greece' }], label: 'Country', binding: 'country' },
-                { type: 'textbox', label: 'City', binding: 'city' },
+                { type: 'select', options: [{ value: 'sby', text: 'Surabaya' }, { value: 'kdr', text: 'Kediri' }, { value: 'blt', text: 'Blitar' }], label: 'Negara', binding: 'country' },
+                { type: 'textbox', label: 'Kota', binding: 'city' },
             ],
             { type: 'textbox', label: 'Photo Url', binding: 'ImgUrl', btn: 'Upload' },
             { type: 'textbox', label: 'Phone', binding: 'Mobile' },
         ],
+        
         buttons: {
-            //edit: {
-            //    icon: FamilyTree.icon.edit(24, 24, '#fff'),
-            //    text: 'Edit',
-            //    hideIfEditMode: true,
-            //    hideIfDetailsMode: false
-            //},
+            edit: null,
+            share: null,
+            pdf: null
+            /*
+            edit: {
+                icon: FamilyTree.icon.edit(24, 24, '#fff'),
+                text: 'Edit',
+                hideIfEditMode: true,
+                hideIfDetailsMode: false
+            },
             share: {
                 icon: FamilyTree.icon.share(24, 24, '#fff'),
                 text: 'Share'
             },
             pdf: {
                 icon: FamilyTree.icon.pdf(24, 24, '#fff'),
-                text: 'Save as PDF'
+                text: 'Save as PDF',
             },
             remove: null
+            */
         }
     }
 });
-
 //family.on('init', function (sender) { sender.editUI.show(030101, true); });
-
 family.editUI.on('element-btn-click', function (sender, args) {
     FamilyTree.fileUploadDialog(args, function (file) {
         var formData = new FormData();
@@ -101,32 +119,34 @@ family.load(
         // 
 
         // Leluhur
-        { id: 010101, pids: [010102], gender: 'male', name: 'Buyut Abu Amr', birthDate: '1893-06-05', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Shelekhov", country: "Indonesia" },
-        { id: 010102, pids: [010101], gender: 'female', name: 'Istrinya Buyut Abu Amr', birthDate: '1891-09-19', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Shelekhov", country: "Indonesia" },
-        { id: 020101, pids: [020102], gender: 'male', name: 'Canggah', fid: 010101, mid: 010102, birthDate: '1921-07-14', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Krasnoyarsk", country: "Indonesia" },
-        { id: 020102, pids: [020101], gender: 'female', name: 'Istrinya Canggah', birthDate: '1933-11-02', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Krasnoyarsk", country: "Indonesia" },
-        { id: 020201, pids: [020202], gender: 'male', name: 'Saudaranya Canggah', fid: 010101, mid: 010102, birthDate: '1921-07-14', photo: 'assets/img/male.jpg', city: "Krasnoyarsk", country: "Indonesia" },
-        { id: 020202, pids: [020201], gender: 'female', name: 'Istrinya', birthDate: '1934-10-11', photo: 'assets/img/female.jpg', city: "Krasnoyarsk", country: "Indonesia" },
+        { id: 010101, pids: [010102], html: "Berikan doa untuk Buyut kita, Alfatihah!", gender: 'male', name: 'Buyut Abu Amr', des: 'halooo', birthDate: '1893-06-05', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 010102, pids: [010101], html: "Berikan doa untuk Buyut kita, Alfatihah!", gender: 'female', name: 'Istrinya Buyut Abu Amr', birthDate: '1891-09-19', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 020101, pids: [020102], html: "Berikan doa untuk Canggah kita, Alfatihah!", gender: 'male', name: 'Canggah', fid: 010101, mid: 010102, birthDate: '1921-07-14', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 020102, pids: [020101], html: "Berikan doa untuk orangtua kita, Alfatihah!", gender: 'female', name: 'Istrinya Canggah', birthDate: '1933-11-02', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 020201, pids: [020202], html: "Berikan doa untuk Canggah, Alfatihah!", gender: 'male', name: 'Saudaranya Canggah', fid: 010101, mid: 010102, birthDate: '1921-07-14', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 020202, pids: [020201], html: "Berikan doa untuk Canggah, Alfatihah!", gender: 'female', name: 'Istrinya', birthDate: '1934-10-11', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
         
         // Anak dari H. Robani
-        { id: 030101, pids: [030102], gender: 'male', name: 'H. Robani', fid: 020101, mid: 020102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/H Robani.jpeg', city: "Kediri", country: "Indonesia" },
-        { id: 030102, pids: [030101], gender: 'female', name: 'Hj. Jariyah', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/Hj Jariyah.jpeg', city: "Kediri", country: "Indonesia" },
-        { id: 030201, pids: [030202], gender: 'male', name: 'Saudara Kembarnya H. Robani', fid: 020101, mid: 020102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
-        { id: 030202, pids: [030201], gender: 'female', name: 'Istrinya', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 030101, pids: [030102], html: "Berikan doa untuk orangtua kita, Alfatihah!", gender: 'male', name: 'H. Robani', fid: 020101, mid: 020102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/H Robani.jpeg', city: "Kediri", country: "Indonesia" },
+        { id: 030102, pids: [030101], html: "Berikan doa untuk orangtua kita, Alfatihah!", gender: 'female', name: 'Hj. Jariyah', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/Hj Jariyah.jpeg', city: "Kediri", country: "Indonesia" },
+        { id: 030201, pids: [030202], html: "Berikan doa untuk Mbah, Alfatihah!", gender: 'male', name: 'Saudara Kembarnya H. Robani', fid: 020101, mid: 020102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 030202, pids: [030201], html: "Berikan doa untuk Mbah, Alfatihah!", gender: 'female', name: 'Istrinya', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
         
-        { id: 040101, pids: [040102], gender: 'male', name: 'Soepono', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', address: "Sekitar Surabaya", city: "Surabaya", phone: "+62 0000 000 00", country: "Indonesia" },
-        { id: 040102, pids: [040101], gender: 'female', name: 'Siti Futikat', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Sekitar Surabaya", city: "Surabaya", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040101, pids: [040102], html: "Berikan doa untuk orangtua kita, Alfatihah!", gender: 'male', name: 'Soepono', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', address: "Sekitar Surabaya", city: "Surabaya", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040102, pids: [040101], html: "Berikan doa untuk orangtua kita, Alfatihah!", gender: 'female', name: 'Siti Futikat', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Sekitar Surabaya", city: "Surabaya", phone: "+62 0000 000 00", country: "Indonesia" },
         
-        { id: 040201, gender: 'male', name: 'Moh', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040201, pids: [040201222],gender: 'male', name: 'Muhtadi', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "-", country: "Indonesia" },
+        { id: 040201222, pids: [040201],gender: 'female', name: 'Istrinya', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", phone: "-", country: "Indonesia" },
+        { id: 04020100, gender: 'female', name: 'Wijiastuti', fid: 040201, mid: 040201222, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", phone: "-", country: "Indonesia" },
         
-        { id: 040301, pids: [040302], gender: 'male', name: 'Abdul Rouf', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", phone: "+62 0000 000 00", country: "Indonesia" },
-        { id: 040302, pids: [040301], gender: 'female', name: 'Miftahul Rohmah', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg',  city: "Tulungagung", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040301, pids: [040302], html: "Berikan doa untuk orangtua kita, Alfatihah!", gender: 'male', name: 'Abdul Rouf', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", phone: "+62 0000 000 00", country: "Indonesia" },
+        { id: 040302, pids: [040301], html: "Berikan doa untuk orangtua kita, Alfatihah!", gender: 'female', name: 'Miftahul Rohmah', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg',  city: "Tulungagung", phone: "+62 0000 000 00", country: "Indonesia" },
         
         { id: 040401, pids: [040402], gender: 'male', name: 'Iktiarno', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
         { id: 040402, pids: [040401], gender: 'female', name: 'Kaliyatin', fid: 030101, mid: 030102,birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
         
         { id: 040501, pids: [040502], gender: 'male', name: 'Isa', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
-        { id: 040502, pids: [040501], gender: 'female', name: 'Rufiatus Sholehah', fid: 030101, mid: 030102,birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 040502, pids: [040501], html: "Berikan doa untuk orangtua kita, Alfatihah!", gender: 'female', name: 'Rufiatus Sholehah', fid: 030101, mid: 030102,birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
         
         { id: 040601, pids: [040602], gender: 'male', name: 'Ustadz', fid: 030101, mid: 030102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", country: "Indonesia" },
         { id: 040602, pids: [040601], gender: 'female', name: 'Nur', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", country: "Indonesia" },
@@ -143,11 +163,11 @@ family.load(
         { id: 0501022, gender: 'female', name: 'Jelita', fid: 040701, mid: 040702, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
         { id: 050301, gender: 'male', name: 'Risky', fid: 040701, mid: 040702, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Kediri", phone: "+62 0000 000 00", country: "Indonesia" },
         
-        { id: 050101, pids: [050102], gender: 'male', name: 'Lino Garda Denaro', fid: 040501, mid: 040502, birthDate: '1993-06-22', deathDate: 'yyyy-mm-dd', photo: 'assets/img/lino.jpg', city: "Krasnodar", country: "Indonesia" },
-        { id: 050102, pids: [050101], gender: 'female', name: 'An Nuur Taqwayaroh Wamayataqillah', birthDate: '1995-06-13', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Neybuta, bld. 57, appt. 336", city: "Primorskiy kray", phone: "+7(4232)14-90-18", country: "Indonesia" },
-        { id: 060102, gender: 'female', name: 'Khalishah Nazra At-Taqqi', fid: 050101, mid: 050102, birthDate: '2021-03-20', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Ul Krasilnikova, bld. 24", city: "Kemerovo", phone: "+7(3842)45-38-84", country: "Indonesia" },
+        { id: 050101, pids: [050102], gender: 'male', name: 'Lino Garda Denaro', fid: 040501, mid: 040502, birthDate: '1993-06-22', deathDate: 'yyyy-mm-dd', photo: 'assets/img/lino.jpg', city: "Kediri", country: "Indonesia" },
+        { id: 050102, pids: [050101], gender: 'female', name: 'An Nuur Taqwayaroh Wamayataqillah', birthDate: '1995-06-13', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "-", city: "Primorskiy kray", phone: "-", country: "Indonesia" },
+        { id: 060102, gender: 'female', name: 'Khalishah Nazra At-Taqqi', fid: 050101, mid: 050102, birthDate: '2021-03-20', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "-", city: "Kemerovo", phone: "-", country: "Indonesia" },
         
-        { id: 050202, gender: 'female', name: 'Klara Noviantika Sandy', fid: 040501, mid: 040502, birthDate: '1995-11-07', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "Neybuta, bld. 57, appt. 336", city: "Primorskiy kray", phone: "+7(861)166-92-10", country: "Indonesia" },
+        { id: 050202, gender: 'female', name: 'Klara Noviantika Sandy', fid: 040501, mid: 040502, birthDate: '1995-11-07', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', address: "-", city: "Primorskiy kray", phone: "-", country: "Indonesia" },
         
         // Keluarga Abdul Rouf
         { id: 61, pids: [62], gender: 'male', name: 'Moh. Heru Efendi', fid: 040301, mid: 040302, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Tulungagung", country: "Indonesia" },
@@ -211,6 +231,12 @@ family.load(
         { id: 58, gender: 'female', name: 'Cinta', fid: 52, mid: 53, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 59, gender: 'male', name: 'Diaz', fid: 52, mid: 53, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
         { id: 60, gender: 'male', name: 'Reza', fid: 52, mid: 53, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
+        
+        { id: 6700, pids: [6800], gender: 'male', name: 'Taufiq Indrayana', fid: 040101, mid: 040102, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 6800, pids: [6700], gender: 'female', name: 'Istrinya', birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 6900, gender: 'female', name: 'Anak-1', fid: 6700, mid: 6800, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 7000, gender: 'male', name: 'Anak-2', fid: 6700, mid: 6800, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/male.jpg', city: "Surabaya", country: "Indonesia" },
+        { id: 7100, gender: 'female', name: 'Anak-3', fid: 6700, mid: 6800, birthDate: 'yyyy-mm-dd', deathDate: 'yyyy-mm-dd', photo: 'assets/img/female.jpg', city: "Surabaya", country: "Indonesia" },
         
 
         // Keluarga Pak Iktiarno
